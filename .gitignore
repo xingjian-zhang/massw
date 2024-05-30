@@ -1,3 +1,9 @@
+# Dev notebooks
+dev.ipynb
+
+# Logging
+**/oaib.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
