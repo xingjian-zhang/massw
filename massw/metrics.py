@@ -7,14 +7,14 @@ import asyncio
 import json
 from typing import List, Union
 
-import api
+import massw.api_gpt as api_gpt
 import evaluate
 import numpy as np
 
 
 async def get_embeddings_helper(texts: List[str]):
     """Asynchronously get embeddings for a list of texts."""
-    batch = api.Batch(tpm=200_000, azure=api.AzureConfig(), loglevel=0)
+    batch = api_gpt.Batch(tpm=200_000, azure=api_gpt.AzureConfig(), loglevel=0)
     for i, text in enumerate(texts):
         await batch.add(
             endpoint="embeddings.create",
