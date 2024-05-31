@@ -1,3 +1,9 @@
+# Raw data
+raw_data/
+filtered_data_with_meta_info.jsonl
+meta_data_cache.json
+.DS_store
+
 # Dev notebooks
 dev.ipynb
 
