@@ -57,7 +57,7 @@ def stratified_sampling(conference_papers, target_samples=60):
     # Determine the number of strata (at most 10)
     num_years = len(unique_years)
     num_strata = min(10, num_years)
-    print(f"Num years: {num_years}, Num strata: {num_strata}")
+    # print(f"Num years: {num_years}, Num strata: {num_strata}")
     strata_size = math.ceil(num_years / num_strata)
     print(f"Strata size: {strata_size}")
     

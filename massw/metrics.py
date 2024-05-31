@@ -29,15 +29,16 @@ async def get_embeddings_helper(texts: List[str]):
 class CosineSimilarity:
     """Compute cosine similarity between two ordered list of texts."""
 
-    def get_embeddings(self, texts: List[str]):
+    async def get_embeddings(self, texts: List[str]):
         loop = asyncio.get_event_loop()
-        results_df = loop.run_until_complete(get_embeddings_helper(texts))
+        # results_df = loop.run_until_complete(get_embeddings_helper(texts))
+        results_df = await get_embeddings_helper(texts)
         embeddings = results_df.sort_values("id").apply(
             lambda x: x["result"]["data"][0]["embedding"], axis=1)
         embeddings = np.array(embeddings.tolist())
         return embeddings
 
-    def compute(
+    async def compute(
         self,
         predictions: List[str],
         references: Union[List[str], List[List[str]]],
@@ -48,8 +49,8 @@ class CosineSimilarity:
                 new_predictions.extend([pred] * len(refs))
             new_references = [ref for refs in references for ref in refs]
             predictions, references = new_predictions, new_references
-        predictions_embeddings = self.get_embeddings(predictions)
-        references_embeddings = self.get_embeddings(references)
+        predictions_embeddings = await self.get_embeddings(predictions)
+        references_embeddings = await self.get_embeddings(references)
         # Compute pairwise cosine similarity
         cosine_similarities = []
         for pred, ref in zip(predictions_embeddings, references_embeddings):
@@ -57,7 +58,7 @@ class CosineSimilarity:
         return {"cosine": np.mean(np.array(cosine_similarities))}
 
 
-def compute_all_metrics(predictions: List[str], references: List[List[str]]):
+async def compute_all_metrics(predictions: List[str], references: List[List[str]]):
     cs = CosineSimilarity()
     rouge = evaluate.load("rouge")
     bleu = evaluate.load("bleu")
@@ -65,10 +66,11 @@ def compute_all_metrics(predictions: List[str], references: List[List[str]]):
     bertscore = evaluate.load("bertscore")
     metrics = {
         "cosine":
-        cs.compute(
-            predictions=predictions,
-            references=references,
-        ),
+        await cs.compute(predictions=predictions, references=references),
+        # cs.compute(
+        #     predictions=predictions,
+        #     references=references,
+        # ),
         "rouge":
         rouge.compute(
             predictions=predictions,
@@ -101,8 +103,9 @@ if __name__ == "__main__":
                   ["The dog ate my homework."]]
 
     # Compute metrics
-    metrics = compute_all_metrics(predictions=predictions,
-                                  references=references)
+    # metrics = compute_all_metrics(predictions=predictions,
+    #                               references=references)
+    metrics = asyncio.run(compute_all_metrics(predictions=predictions, references=references))
 
     # Print results
     print(json.dumps(metrics, indent=2))

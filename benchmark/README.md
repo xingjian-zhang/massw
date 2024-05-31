@@ -5,3 +5,8 @@
 3. run `python stratified_sampling.py`
 4. the test set is located at `massw/benchmark/test_set_processing/test_set.jsonl`, consisting of 1200 papers
 
+## How to run the benchmark
+
+run `python test.py`
+
+a sample evalution ressults on 30 test cases is stored in `evaluation_results_30_samples.json`

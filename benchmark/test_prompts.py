@@ -29,6 +29,7 @@ def idea_generation(data):
     context = data['context']
     prompt = f"Given the context of '{context}', generate key ideas that could advance this area of study. "
     ground_truth = data['key_idea']
+    assert ground_truth is not '', "Key Idea is missing in the data"
     return prompt, ground_truth
 
 # Task 2: Method recommendation
@@ -36,7 +37,8 @@ def method_recommendation(data):
     context = data['context']
     key_idea = data['key_idea']
     prompt = f"Given the context: '{context}' and the key idea: '{key_idea}', recommend the most suitable method to validate this idea. "
-    ground_truth = data.get('recommended_method_prompt', '')
+    ground_truth = data.get('method', '')
+    assert ground_truth != '', "Method is missing in the data"
     return prompt, ground_truth
 
 # Task 3: Outcome prediction
@@ -46,6 +48,7 @@ def outcome_prediction(data):
     method = data['method']
     prompt = f"Based on the context: '{context}', the key idea: '{key_idea}', and the recommended method: '{method}', predict the potential outcome of this research. "
     ground_truth = data['outcome']
+    assert ground_truth != '', "Outcome is missing in the data"
     return prompt, ground_truth
 
 # Task 4: Future work recommendation/impact prediction
@@ -56,6 +59,7 @@ def future_work_recommendation(data):
     outcome = data['outcome']
     prompt = f"Based on the context: '{context}', the key idea: '{key_idea}', the method: '{method}', and the outcome: '{outcome}', suggest projected Impact for this research."
     ground_truth = data.get('future_impact', '')
+    assert ground_truth != '', "Future Impact is missing in the data"
     return prompt, ground_truth
 
 # Task 5: Predicting title based on all aspects
@@ -67,6 +71,7 @@ def predict_title(data):
     future_impact = data['future_impact']
     prompt = f"Given the context: '{context}', the key idea: '{key_idea}', the method: '{method}', the outcome: '{outcome}', and the future impact: '{future_impact}', predict the title of this research paper. The title should be concise and reflective of the core aspects."
     ground_truth = data.get('title', '')
+    assert ground_truth != '', "Title is missing in the data"
     return prompt, ground_truth
 
 # # Process the test set

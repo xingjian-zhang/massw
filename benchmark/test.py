@@ -50,7 +50,7 @@ async def main():
 
     print(f"Loaded {len(test_cases)} test cases")
 
-    test_cases = [test_cases[0], test_cases[1]]
+    test_cases = [test_cases[i] for i in range(30)]
 
     # Process each task separately and collect outputs
     tasks = [
@@ -65,7 +65,11 @@ async def main():
     
     for task_name, generate_prompt_fn in tasks:
         outputs, references = await process_task(task_name, generate_prompt_fn, test_cases)
-        metrics = compute_all_metrics(predictions=outputs, references=references)
+        print(f"Processed task: {task_name}")
+        # print(f"Outputs: {outputs}")
+        # print(f"References: {references}")
+        # metrics = compute_all_metrics(predictions=outputs, references=references)
+        metrics = await compute_all_metrics(predictions=outputs, references=references)
         results[task_name] = metrics
     
     # Save the results
