@@ -19,10 +19,12 @@ from massw.metrics import compute_all_metrics
 async def process_task(task_name, generate_prompt_fn, test_cases, model="gpt-3.5-turbo"):
     # Initialize batch processing
     batch = Batch(tpm=10000)
+    references = []
     
     # Add chat completion requests for the task prompts
     for entry in test_cases:
-        prompt = generate_prompt_fn(entry)
+        prompt, ground_truth = generate_prompt_fn(entry)
+        references.append(ground_truth)
         await batch.add(
             "chat.completions.create",
             model=model,
@@ -38,7 +40,7 @@ async def process_task(task_name, generate_prompt_fn, test_cases, model="gpt-3.5
     # Extract the outputs
     outputs = chat_results["result"].apply(lambda x: x["choices"][0]["message"]["content"]).tolist()
     
-    return outputs
+    return outputs, references
 
 # Main function to process all tasks and evaluate the outputs
 async def main():
@@ -48,10 +50,8 @@ async def main():
 
     print(f"Loaded {len(test_cases)} test cases")
 
-    print(f"{test_cases[0] = }")
-
     test_cases = [test_cases[0], test_cases[1]]
-    
+
     # Process each task separately and collect outputs
     tasks = [
         ("idea_generation", idea_generation),
@@ -64,8 +64,7 @@ async def main():
     results = {}
     
     for task_name, generate_prompt_fn in tasks:
-        outputs = await process_task(task_name, generate_prompt_fn, test_cases)
-        references = [entry[task_name] for entry in test_cases]
+        outputs, references = await process_task(task_name, generate_prompt_fn, test_cases)
         metrics = compute_all_metrics(predictions=outputs, references=references)
         results[task_name] = metrics
     

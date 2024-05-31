@@ -120,13 +120,7 @@ def count_total_lines(file_paths):
 
 if __name__ == "__main__":
 
-    file_paths = [
-                  "../../raw_data/2024-05-30_11-54-04.jsonl",
-                  "../../raw_data/2024-05-30_05-00-00.jsonl",
-                  "../../raw_data/2024-05-29_21-45-15.jsonl",
-                  "../../raw_data/2024-05-29_17-58-51.jsonl",
-                  "../../raw_data/2024-05-29_14-20-46.jsonl",
-                  "../../raw_data/2024-05-29_13-45-50.jsonl"]
+    file_paths = ["../../raw_data/extracted_0525_0531.jsonl"]
 
     meta_file_path = "../../raw_data/oag_publication_selected_0525.json"
 
