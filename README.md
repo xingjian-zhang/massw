@@ -63,19 +63,6 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-## Download MASSW dataset
-
-To download the dataset, you can use the provided script:
-
-```bash
-python massw/download.py
-```
-
-Or download the dataset manually through Dropbox links:
-[[MASSW dataset (150.6MB)](https://www.dropbox.com/scl/fi/ykkrpf269fikuchy429l7/massw_v1.tsv?rlkey=mssrbgz3k8adij1moxqtj34ie&dl=1)]
-[[MASSW metadata
-(896.2MB)](https://www.dropbox.com/scl/fi/r2jlil9lj0ypo2fpl3fxa/massw_metadata_v1.jsonl?rlkey=ohnriak63x4ekyli25naajp0q&dl=1)].
-
 ## Basic Usage
 
 Search for a specific publication by title:
@@ -122,9 +109,7 @@ Output:
   'year': 2017,
   'data': {'id': 2963403868,
    'title': 'Attention is All You Need',
-   'authors': [{'name': 'Ashish Vaswani',
-     'id': 2171687631,
-     'org_id': 1291425158},
+   'authors': [{'name': 'Ashish Vaswani', 'id': 2171687631, 'org_id': 1291425158},
     {'name': 'Noam Shazeer', 'id': 2496873187, 'org_id': 1291425158},
     {'name': 'Niki Parmar', 'id': 2625834147, 'org_id': 1174212},
     {'name': 'Jakob Uszkoreit', 'id': 2226984371, 'org_id': 1291425158},
@@ -174,6 +159,20 @@ The dataset is iterable and ready for loop processing:
 for workflow in massw:
     print(workflow.title)
 ```
+
+### Download MASSW dataset
+
+The dataset is downloaded automatically when you first run `load_massw()`.
+To download the dataset manually, you can use the provided script:
+
+```bash
+python massw/download.py
+```
+
+Or download the dataset through Dropbox links:
+[[MASSW dataset (150.6MB)](https://www.dropbox.com/scl/fi/ykkrpf269fikuchy429l7/massw_v1.tsv?rlkey=mssrbgz3k8adij1moxqtj34ie&dl=1)]
+[[MASSW metadata
+(896.2MB)](https://www.dropbox.com/scl/fi/r2jlil9lj0ypo2fpl3fxa/massw_metadata_v1.jsonl?rlkey=ohnriak63x4ekyli25naajp0q&dl=1)].
 
 ## Benchmark Tasks
 
