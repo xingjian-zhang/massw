@@ -1,0 +1,10 @@
+bert-score
+evaluate
+jsonlines
+numpy
+openai
+pandas
+rouge_score
+sentence_transformers
+tqdm
+wget

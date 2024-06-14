@@ -1,0 +1,2 @@
+[MESSAGES CONTROL]
+disable=wrong-import-position,import-error,wrong-import-order,protected-access,too-many-instance-attributes,too-many-arguments,broad-exception-caught,attribute-defined-outside-init,dangerous-default-value,invalid-name

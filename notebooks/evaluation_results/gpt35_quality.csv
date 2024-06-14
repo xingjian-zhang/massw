@@ -1,0 +1,6 @@
+,context,key_idea,method,outcome,projected_impact
+Cosine Embedding,0.934,0.936,0.895,0.928,0.876
+BLEURT,0.597,0.575,0.510,0.608,0.498
+BERTScore-f1,0.934,0.927,0.910,0.934,0.905
+BLEU,0.524,0.439,0.197,0.452,0.170
+ROUGE-1,0.635,0.582,0.445,0.626,0.371

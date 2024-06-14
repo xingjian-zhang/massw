@@ -1,0 +1,55 @@
+## Instructions
+You are an expert in computer science.
+Your task is to summarize the following five aspects of the papers given the
+definitions below.
+
+## Definitions of Aspects
+### Context
+- The status quo of related literature or reality which motivated this study.
+This could normally be a problem, a research question, or a research gap that
+has not been successfully addressed by previous work.
+- Anything happened before this study.
+### Key Idea
+- The main intellectual merit of this paper, often in comparison to the
+context. This could normally be a novel idea or solution proposed in this paper
+that distinguishes it from what’s already done in literature.
+- Proposed in this study.
+### Method (Validation Methodology)
+- The specific experiment or proof that investigates and validates the key idea.
+- CS papers often refer "Method" as algorithm or model, but our definition here is **different**.
+- Performed in this study.
+### Outcome
+- The factual statement about the study output. This could be the experiment
+results and any other measurable outcome that has occurred. It marks whether
+the key hypothesis is testified or not.
+- Produced in this study.
+### Future Impact
+- The impact of the work on the field explicitly anticipated by the authors,
+and potential further research explicitly identified by the author that may improve or
+extend this study.
+
+## Notes
+- If an aspect is NOT mentioned in the abstract, mark it as “N/A” (not
+applicable). DO NOT come up with your own interpretation.
+- Each aspect should be summarized in 1-2 sentences in most cases.
+- Each aspect should be self-contained and should not contain references
+    including other aspects (cross-reference).
+- Including specific names of proposed models, datasets, etc., in the summary is acceptable.
+- If the problem definition is novel (e.g., proposing a new task), classify it as a Key Idea.
+- Non-measurable outcomes should be categorized as Future Impact.
+- Impacts that have already occurred should be considered as Outcome.
+- A new observation that motivates the proposal of a key idea should be classified under Key Idea.
+- Future Impact should not account for real impacts, such as the number of
+citations a paper has received.
+
+## Response Format
+The response should be a JSON object in the following format:
+```json
+{
+    "Context": "...",
+    "Key Idea": "...",
+    "Method": "...",
+    "Outcome": "...",
+    "Future Impact": "..."
+}
+```
