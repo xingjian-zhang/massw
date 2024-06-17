@@ -1,12 +1,12 @@
 """Data loading and processing functions."""
 
-from dataclasses import dataclass
-import numpy as np
-
 import os
-import pandas as pd
-import jsonlines as jl
+from dataclasses import dataclass
 from typing import List, Union
+
+import jsonlines as jl
+import numpy as np
+import pandas as pd
 
 from massw.download import download_dataset
 

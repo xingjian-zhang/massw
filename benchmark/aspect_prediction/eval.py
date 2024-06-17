@@ -1,13 +1,14 @@
 """Evaluate experiment results based on the model generated output (file)."""
-import pandas as pd
-from massw.metrics import compute_metrics, flatten_metrics
-from massw.models import gpt_azure, mixtral_azure
-from utils import postprocess_cot, TASK_NAMES, TASK2GT
-
 import argparse
 import json
 import sys
+
 import nest_asyncio
+import pandas as pd
+from utils import TASK2GT, TASK_NAMES, postprocess_cot
+
+from massw.metrics import compute_metrics, flatten_metrics
+from massw.models import gpt_azure, mixtral_azure
 
 sys.path.append("..")
 nest_asyncio.apply()

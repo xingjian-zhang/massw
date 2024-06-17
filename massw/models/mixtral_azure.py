@@ -1,10 +1,11 @@
 """Api module for interacting with the Mixtral model."""
-import urllib.request
 import json
-import pandas as pd
-import time
 import os
+import time
+import urllib.request
 from typing import Dict
+
+import pandas as pd
 
 
 def prompts_to_raw_output(messages):
