@@ -6,22 +6,18 @@ and is designed to work with large sets
 of test data asynchronously.
 """
 
-from massw.api.api_gpt import prompts_to_raw_output_gpt
-from massw.api.api_mistral import prompts_to_raw_output_mistral
-
-from prompts import (
-    future_work_recommendation, idea_generation, method_recommendation,
-    outcome_prediction, predict_title, SYSTEM_PROMPT
-)
-from utils import (
-    allow_self_signed_https, load_examples,
-    MODEL_CHOICES, PROMPT_CHOICES, save_results
-)
-
 import argparse
 import os
 import sys
+
 import jsonlines as jl
+from prompts import (SYSTEM_PROMPT, future_work_recommendation,
+                     idea_generation, method_recommendation,
+                     outcome_prediction, predict_title)
+from utils import (MODEL_CHOICES, PROMPT_CHOICES, allow_self_signed_https,
+                   load_examples, save_results)
+
+from massw.models import gpt_azure, mixtral_azure
 
 sys.path.append("../..")
 
@@ -33,7 +29,7 @@ few_shot_examples, cot_examples = load_examples()
 def prepare_messages(model, task_name, prompt_type, main_prompt):
     """Prepare the messages based on the task and prompt type."""
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-    if model == "mistral-8x7b":
+    if model == "mixtral-8x7b":
         format_instruction = "\nNever use double quotes in your output. \
                              Use single quotes instead.\n"
         messages = [
@@ -74,10 +70,10 @@ def process_task(generate_prompt_fn, test_cases, task_name, **kwargs):
         messages.append((entry['pid'], message))
 
     model = kwargs['model']
-    if model == "mistral-8x7b":
-        chat_results = prompts_to_raw_output_mistral(messages)
+    if model == "mixtral-8x7b":
+        chat_results = mixtral_azure.prompts_to_raw_output(messages)
     elif model in ["gpt-35-turbo", "gpt-4"]:
-        chat_results = prompts_to_raw_output_gpt(messages,
+        chat_results = gpt_azure.prompts_to_raw_output(messages,
                                                  model,
                                                  kwargs.get('tpm'))
     else:
@@ -138,7 +134,7 @@ def main():
 
     tokens_per_minute = {"gpt-35-turbo": 40000,
                          "gpt-4": 10000,
-                         "mistral-8x7b": None}
+                         "mixtral-8x7b": None}
 
     for task_name, generate_prompt_fn in tasks:
         print(f"Processing task: {task_name}")

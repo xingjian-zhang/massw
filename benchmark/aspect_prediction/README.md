@@ -10,7 +10,7 @@ python benchmark/aspect_prediction/task.py --model <model> --prompt <prompt_styl
 
 where:
 
-- `<model>` is chosen from `gpt-35-turbo`, `gpt-4`, `mistral-8x7b`.
+- `<model>` is chosen from `gpt-35-turbo`, `gpt-4`, `mixtral-8x7b`.
 - `<prompt_style>` is chosen from `zero-shot`, `few-shot`, `chain-of-thought`, `few-shot-cot`.
 
 > We provide the benchmark output through a Dropbox link
@@ -44,7 +44,7 @@ To extend the functionality of MASSW by adding custom API scripts for additional
 Place your custom API scripts in the `massw/api` directory. This should be similar in structure and design to the existing scripts:
 
 - `massw/api/api_gpt.py`
-- `massw/api/api_mistral.py`
+- `massw/api/api_mixtral.py`
 
 #### 2. **Required Functions**
 
@@ -73,10 +73,10 @@ def prompts_to_raw_output_<model_name>(messages: List[Tuple[str, str]], **other_
   def raw_output_to_dict_<model_name>(output_path: str) -> Dict[str, str]:
       """
       Convert raw outputs into a dictionary mapping from paper ID to output.
-  
+
       Parameters:
       - output_path (str): The file path to the output directory where the results are stored.
-  
+
       Returns:
       - Dict[str, str]: A dictionary mapping each paper ID to its corresponding output.
       """

@@ -58,7 +58,7 @@ async def add_messages_and_run(batch, messages, model):
     return await batch.run()
 
 
-def prompts_to_raw_output_gpt(messages, model, tpm):
+def prompts_to_raw_output(messages, model, tpm):
     """
     Simulate API call to a GPT-based model.
 
@@ -72,7 +72,7 @@ def prompts_to_raw_output_gpt(messages, model, tpm):
     return results
 
 
-def raw_output_to_dict_gpt(output_path: str) -> Dict[str, str]:
+def raw_output_to_dict(output_path: str) -> Dict[str, str]:
     """
     Load and convert raw output from the GPT model into a dictionary.
 

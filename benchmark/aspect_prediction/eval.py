@@ -1,8 +1,7 @@
 """Evaluate experiment results based on the model generated output (file)."""
 import pandas as pd
 from massw.metrics import compute_metrics, flatten_metrics
-from massw.api.api_gpt import raw_output_to_dict_gpt
-from massw.api.api_mistral import raw_output_to_dict_mistral
+from massw.models import gpt_azure, mixtral_azure
 from utils import postprocess_cot, TASK_NAMES, TASK2GT
 
 import argparse
@@ -40,9 +39,9 @@ def postprocess_output(model_output_dir,
         model_path = f"{model_output_dir}/{task_name}.tsv"
 
         if model_type == "gpt":
-            id2predictions = raw_output_to_dict_gpt(model_path)
-        elif model_type == "mistral":
-            id2predictions = raw_output_to_dict_mistral(model_path)
+            id2predictions = gpt_azure.raw_output_to_dict(model_path)
+        elif model_type == "mixtral":
+            id2predictions = mixtral_azure.raw_output_to_dict(model_path)
         else:
             raise ValueError(f"Model type {model_type} not supported.")
 
@@ -80,7 +79,7 @@ def main():
         help="Used COT.",
     )
     args = parser.parse_args()
-    model_type = "gpt" if "gpt" in args.model_output_dir else "mistral"
+    model_type = "gpt" if "gpt" in args.model_output_dir else "mixtral"
 
     results = postprocess_output(
         args.model_output_dir,

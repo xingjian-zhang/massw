@@ -3,7 +3,7 @@ import ssl
 import json
 import os
 
-MODEL_CHOICES = ["gpt-35-turbo", "gpt-4", "mistral-8x7b"]
+MODEL_CHOICES = ["gpt-35-turbo", "gpt-4", "mixtral-8x7b"]
 PROMPT_CHOICES = ["zero-shot", "few-shot", "chain-of-thought", "few-shot-cot"]
 
 
