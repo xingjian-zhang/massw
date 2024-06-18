@@ -29,19 +29,19 @@ for i in range(5):
 embeddings = await batch.run()
 ```
 """
+import ast
+import asyncio
 import os
 import signal
-import asyncio
-import ast
 from asyncio import (FIRST_COMPLETED, CancelledError, Event, Lock, Queue,
-                     QueueEmpty, create_task, gather, sleep,
-                     wait, wait_for)
+                     QueueEmpty)
 from asyncio import TimeoutError as AsyncTimeoutError
+from asyncio import create_task, gather, sleep, wait, wait_for
 from datetime import datetime
 from os import environ
 from time import time
 from types import SimpleNamespace
-from typing import Coroutine, List, Set, Dict
+from typing import Coroutine, Dict, List, Set
 
 import openai
 import pandas as pd
@@ -58,7 +58,7 @@ async def add_messages_and_run(batch, messages, model):
     return await batch.run()
 
 
-def prompts_to_raw_output_gpt(messages, model, tpm):
+def prompts_to_raw_output(messages, model, tpm):
     """
     Simulate API call to a GPT-based model.
 
@@ -72,7 +72,7 @@ def prompts_to_raw_output_gpt(messages, model, tpm):
     return results
 
 
-def raw_output_to_dict_gpt(output_path: str) -> Dict[str, str]:
+def raw_output_to_dict(output_path: str) -> Dict[str, str]:
     """
     Load and convert raw output from the GPT model into a dictionary.
 

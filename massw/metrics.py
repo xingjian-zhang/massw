@@ -3,14 +3,15 @@
 See example usage in the `__main__` block at the end of the file.
 """
 
-import json
 import asyncio
+import json
 from typing import List, Union
 
 import evaluate
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from massw.api.api_gpt import AzureConfig, Batch
+
+from massw.models.gpt_azure import AzureConfig, Batch
 
 LLM_SIM_PROMPT = """
 You are an expert in Computer Science with a specialization in text analysis,

@@ -10,7 +10,7 @@ python benchmark/aspect_prediction/task.py --model <model> --prompt <prompt_styl
 
 where:
 
-- `<model>` is chosen from `gpt-35-turbo`, `gpt-4`, `mistral-8x7b`.
+- `<model>` is chosen from `gpt-35-turbo`, `gpt-4`, `mixtral-8x7b`.
 - `<prompt_style>` is chosen from `zero-shot`, `few-shot`, `chain-of-thought`, `few-shot-cot`.
 
 > We provide the benchmark output through a Dropbox link
@@ -37,23 +37,23 @@ python benchmark/aspect_prediction/eval.py --model_output_dir benchmark/aspect_p
 
 ## Adding a Custom Model to MASSW/API
 
-To extend the functionality of MASSW by adding custom API scripts for additional models, follow these guidelines. This will allow your model to integrate seamlessly with the existing framework used for aspect prediction and evaluation.
+To extend the functionality of MASSW by adding custom model scripts for additional models, follow these guidelines. This will allow your model to integrate seamlessly with the existing framework used for aspect prediction and evaluation.
 
 #### 1. **Location for API Scripts**
 
-Place your custom API scripts in the `massw/api` directory. This should be similar in structure and design to the existing scripts:
+Place your custom model scripts in the `massw/models` directory. This should be similar in structure and design to the existing scripts:
 
-- `massw/api/api_gpt.py`
-- `massw/api/api_mistral.py`
+- `massw/models/gpt_azure.py`
+- `massw/models/mixtral_azure.py`
 
 #### 2. **Required Functions**
 
 Each API script must include two essential functions:
 
-- **`prompts_to_raw_output_<model_name>`**: This function processes prompts and generates raw outputs.
+- **`prompts_to_raw_output`**: This function processes prompts and generates raw outputs.
 
 ```python
-def prompts_to_raw_output_<model_name>(messages: List[Tuple[str, str]], **other_arguments) -> pd.DataFrame:
+def prompts_to_raw_output(messages: List[Tuple[str, str]], **other_arguments) -> pd.DataFrame:
     """
     Process prompts to generate raw outputs.
 
@@ -67,16 +67,16 @@ def prompts_to_raw_output_<model_name>(messages: List[Tuple[str, str]], **other_
     pass
 ```
 
-- **`raw_output_to_dict_<model_name>`**: This function parses raw outputs into a dictionary format.
+- **`raw_output_to_dict`**: This function parses raw outputs into a dictionary format.
 
   ```python
-  def raw_output_to_dict_<model_name>(output_path: str) -> Dict[str, str]:
+  def raw_output_to_dict(output_path: str) -> Dict[str, str]:
       """
       Convert raw outputs into a dictionary mapping from paper ID to output.
-  
+
       Parameters:
       - output_path (str): The file path to the output directory where the results are stored.
-  
+
       Returns:
       - Dict[str, str]: A dictionary mapping each paper ID to its corresponding output.
       """
@@ -85,4 +85,7 @@ def prompts_to_raw_output_<model_name>(messages: List[Tuple[str, str]], **other_
 
 #### 3. **Modify the Task Processing Function**
 
-Update the `process_task` function in `benchmark/aspect_prediction/task.py` to handle your custom model by calling your new API functions. Additionally, adapt the `postprocess_output` function in `benchmark/aspect_observer/eval.py` to support the evaluation of your model's outputs.
+Update the `process_task` function in `benchmark/aspect_prediction/task.py` to
+handle your custom model. Additionally, adapt the `postprocess_output` function
+in `benchmark/aspect_observer/eval.py` to support the evaluation of your
+model's outputs.
