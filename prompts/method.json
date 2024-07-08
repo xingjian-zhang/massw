@@ -25,7 +25,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 5,\n \"justification\":Both inputs describe a methodology involving data collection from three patients using a web platform and evaluating its impact on therapy.  However, Input 1 provides additional details about the duration of the case study (two weeks) and the involvement of a psychologist, which are missing in Input 2.  Therefore, the descriptions are similar but not identical. \"\" \n}"
+        "content": "{\n \"score\": 5,\n \"justification\":Both inputs describe a methodology involving data collection from three patients using a web platform and evaluating its impact on therapy. However, Input 1 provides two more additional details: duration of the case study (two weeks) and the effectiveness of new web platform, which are missing in Input 2. Therefore, the descriptions are similar but not identical. \"\" \n}"
     },
     {
         "role": "user",
@@ -33,7 +33,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 7,\n \"justification\":Both inputs describe a similar methodology involving a case study with one psychologist and three patients over two weeks.  The only difference is that Input 1 explicitly states the purpose of the case study (to show the effectiveness of a new web platform), while Input 2 does not mention the platform or its purpose.  Therefore, they are nearly identical in terms of methodology but lack one important detail. \"\" \n}"
+        "content": "{\n \"score\": 7,\n \"justification\":Both inputs describe a similar methodology involving a case study with one psychologist and three patients over two weeks.  The only difference is that Input 2 miss one key-point:  the effectiveness of a new web platform. Therefore, they are nearly identical in terms of methodology but lack one important detail.\"\" \n}"
     },
     {
         "role": "user",

@@ -17,7 +17,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 2,\n \"justification\":Input 1 discusses a web platform to assist psychologists in collecting information about people with dementia.  Input 2 focuses on non-pharmacological interventions for dementia, particularly biographical or personalized materials.  While both relate to dementia, they address different aspects—one is about a technological tool for data collection, and the other about therapeutic methods.  Their key ideas share some thematic overlap but are fundamentally different in focus and application. \"\" \n}"
+        "content": "{\n \"score\": 2,\n \"justification\":Both input discuss only one common key-point: people with dementia. Input 1 discusses a web platform to assist psychologists in collecting information about people with dementia.  Input 2 focuses on non-pharmacological interventions for dementia, particularly biographical or personalized materials.  While both relate to dementia, they address different aspects—one is about a technological tool for data collection, and the other about therapeutic methods.  Their key ideas share some thematic overlap but are fundamentally different in focus and application.\"\" \n}"
     },
     {
         "role": "user",
@@ -25,7 +25,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 5,\n \"justification\": Both inputs describe a web platform aimed at improving the collection of data for specific professional use.  Input 1 specifies the platform supports psychologists working with people with dementia, while Input 2 emphasizes improvements in data collection and therapy awareness.  The core idea of a web platform facilitating data collection is similar, but the specific focus areas slightly differ.\"\" \n}"
+        "content": "{\n \"score\": 5,\n \"justification\": Both inputs describe two main-points: creating a web platform and improving the collection of data for specific professional use.   Input 1 specifies two more key-points: the platform supports psychologists working with people with dementia, while Input 2 emphasizes improvements in data collection and therapy awareness.   The core idea of a web platform facilitating data collection is similar, but the specific focus areas slightly differ.\"\" \n}"
     },
     {
         "role": "user",
@@ -33,7 +33,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 7,\n \"justification\":Both inputs describe a web platform aimed at supporting the care of people with dementia by streamlining the collection of relevant information.  Input 1 focuses on supporting psychologists generally, whereas Input 2 specifies the collection and management of biographical materials for cognitive stimulation practices like reminiscence.  The ideas are closely related but differ slightly in focus and detail. \"\" \n}"
+        "content": "{\n \"score\": 8,\n \"justification\"::Both inputs describe a web platform aimed at supporting the care of people with dementia by streamlining the collection of relevant information.   While input 2 miss one key-point: the platform is supporting psychologists generally, leading to score of 8. \"\" \n}"
     },
     {
         "role": "user",
