@@ -9,7 +9,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 1,\n \"justification\":Two inputs only have one key-point in common: web platform. Input 1 emphasizes improvements in data collection and maintaining therapy awareness accomplished by the web platform, whereas Input 2 highlights motivation and advantages of the web platform.  The overlap is in the concept of data collection for therapeutic purposes, but the specifics and context differ significantly. \"\" \n}"
+        "content": "{\n  \"justification\":Two inputs only have one key-point in common: web platform. Input 1 emphasizes improvements in data collection and maintaining therapy awareness accomplished by the web platform, whereas Input 2 highlights motivation and advantages of the web platform.  The overlap is in the concept of data collection for therapeutic purposes, but the specifics and context differ significantly. \", \n  \"score\": 1\n}"
     },
     {
         "role": "user",
@@ -17,7 +17,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 3,\n \"justification\": Both inputs refer to a web platform and its role in the collection of data about a person.  However, Input 1 specifically mentions ‘case study’, 'improvements' and 'maintaining awareness of the therapy,' while Input 2 only indicates a 'change' in data collection instead of improvement and does not address therapy awareness. And it has more details about experienments.\"\" \n}"
+        "content": "{\n  \"justification\": Both inputs refer to a web platform and its role in the collection of data about a person.  However, Input 1 specifically mentions ‘case study’, 'improvements' and 'maintaining awareness of the therapy,' while Input 2 only indicates a 'change' in data collection instead of improvement and does not address therapy awareness. And it has more details about experienments.\", \n  \"score\": 3\n}"
     },
     {
         "role": "user",
@@ -25,7 +25,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 5,\n \"justification\":Both inputs discuss the case stady shows improvements in the collection of meaningful data about a person.  Input 1 also mentions two other main points: maintaining awareness of therapy and the platform.  Input 2 provides additional context about the participants and duration of the case study, which is not mentioned in Input 1, leading to score of 5.\"\" \n}"
+        "content": "{\n  \"justification\":Both inputs discuss the case stady shows improvements in the collection of meaningful data about a person.  Input 1 also mentions two other main points: maintaining awareness of therapy and the platform.  Input 2 provides additional context about the participants and duration of the case study, which is not mentioned in Input 1, leading to score of 5.\", \n  \"score\": 5\n}"
     },
     {
         "role": "user",
@@ -33,7 +33,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 7,\n \"justification\":Both inputs emphasize three key-points: the case study,  improvements in data collection and maintaining awareness of therapy.  The primary differences are the addition of 'analyzing' in Input 2 and input 2 miss one key-point platform, leading to score of 7. \"\" \n}"
+        "content": "{\n \"justification\":Both inputs emphasize three key-points: the case study,  improvements in data collection and maintaining awareness of therapy.  The primary differences are the addition of 'analyzing' in Input 2 and input 2 miss one key-point platform, leading to score of 7. \", \n  \"score\": 7\n}"
     },
     {
         "role": "user",
@@ -41,6 +41,6 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 9,\n \"justification\":Both inputs describe improvements made by a web platform in the collection of meaningful data about persons and maintaining awareness of therapy. The details are nearly identical, with input2 miss a point: the case study, leading to score of 9.\"\" \n}"
+        "content": "{\n  \"justification\":Both inputs describe improvements made by a web platform in the collection of meaningful data about persons and maintaining awareness of therapy. The details are nearly identical, with input2 miss a point: the case study, leading to score of 9.\", \n  \"score\": 9\n}"
     }
 ]

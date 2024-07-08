@@ -11,7 +11,7 @@ import evaluate
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-from massw.models.gpt_azure import AzureConfig, Batch
+from massw.models.gpt_azure import Batch
 
 LLM_SIM_PROMPT = """
 You are an expert in Computer Science with a specialization in text analysis,
@@ -47,32 +47,29 @@ Example JSON Output:
 class LLMSimilarity:
     """Evaluate the similarity between two texts using a language model."""
 
-    def __init__(self, model_name: str = "gpt-4"):
+    def __init__(self, aspect: str = "context", model_name: str = "gpt-4o"):
         """Initialize the language model similarity evaluator."""
-        assert model_name in ["gpt-4", "gpt-35-turbo"]
+        assert model_name in ["gpt-4o", "gpt-35-turbo"]
         self.model_name = model_name
-        self.tpm = {"gpt-4": 4000, "gpt-35-turbo": 40000}[model_name]
+        self.tpm = {"gpt-4o": 4000, "gpt-35-turbo": 40000}[model_name]
+        self.aspect = aspect
 
     def generate_prompt(self, text_1: str, text_2: str):
         """Generate the prompt for the language model."""
+        with open(f'../prompts/{self.aspect}.json', 'r', encoding='utf-8') as file:
+            messages = json.load(file)
         user_prompt = f"Input 1: {text_1}\nInput 2: {text_2}"
-        messages = [
-            {
-                "role": "system",
-                "content": LLM_SIM_PROMPT
-            },
-            {
+        messages.append({
                 "role": "user",
                 "content": user_prompt
-            },
-        ]
+            })
         return messages
 
     async def _compute(self,
                        predictions: List[str],
                        references: List[List[str]]):
         """Compute the similarity between predictions and references."""
-        batch = Batch(tpm=self.tpm, azure=AzureConfig())
+        batch = Batch(tpm=self.tpm)
         if isinstance(references[0], list):
             new_predictions = []
             for pred, refs in zip(predictions, references):
@@ -214,7 +211,6 @@ class NAHit:
 
 
 cs = CosineSimilarity()
-llm_sim = LLMSimilarity()
 bertscore = evaluate.load("bertscore")
 bleurt = evaluate.load("bleurt",
                        module_type="metric",
@@ -228,7 +224,8 @@ nahit = NAHit()
 
 def compute_metrics(predictions: List[str],
                     references: List[List[str]],
-                    metric_names=None):
+                    metric_names=None,
+                    aspect=None):
     """Compute cosine similarity, ROUGE, BLEU, METEOR, and BERTScore."""
     if metric_names is None:
         metric_names = [
@@ -241,6 +238,13 @@ def compute_metrics(predictions: List[str],
             "nahit",
             "llm_sim"
         ]
+    if aspect is not None and aspect not in ["context",
+                                             "key_idea", "method", "outcome", "future"]:
+        raise ValueError(
+            f"""Invalid type: {aspect}.
+            Must be one of ['context',
+            'key_idea', 'method', 'outcome', 'future']."""
+            )
     metrics = {}
     if "nahit" in metric_names:
         metrics["nahit"] = nahit.compute(
@@ -268,7 +272,7 @@ def compute_metrics(predictions: List[str],
 
     metric_computation_functions = {
         "cosine": cs,
-        "llm_sim": llm_sim,
+        "llm_sim": LLMSimilarity(aspect=aspect),
         "rouge": rouge,
         "bleu": bleu,
         "meteor": meteor,
@@ -358,7 +362,8 @@ if __name__ == "__main__":
     # Compute metrics
     metrics_demo = compute_metrics(predictions=predictions_demo,
                                    references=references_demo,
-                                   metric_names=["llm_sim"])
+                                   metric_names=["llm_sim"],
+                                   aspect = "context")
 
     # Print results
     print(json.dumps(metrics_demo, indent=2))

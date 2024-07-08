@@ -5,11 +5,11 @@
     },
     {
         "role": "user",
-        "content": "Input 1:The authors create a web platform that supports the work of psychologists, streamlining the collection of relevant information about people with dementia.\nInput 2:The authors propose a design strategy for building and customizing modularized parts of a liquid-based smart material printing platform.  The printing platform supports open-source, customizable software."
+        "content": "Input 1:The authors create a web platform that supports the work of psychologists, streamlining the collection of relevant information about people with dementia.\nInput 2:Non-pharmacological interventions are the most common and the most effective for people with dementia. Using biographical or personalized materials has been proven to benefit these interventions."
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 0,\n \"justification\": Input 1 describes a web platform for supporting psychologists in gathering data about dementia patients, while Input 2 discusses a design strategy for a liquid-based smart material printing platform with an emphasis on modular and open-source customization.  These inputs pertain to entirely different fields and objectives, with no overlap in key ideas or context.\"\" \n}"
+        "content": "{\n  \"justification\": Both inputs are related to people with dementia. However, the first input talks about a web platform to help psychologists collect information, while the second input focuses on the effectiveness of non-pharmacological interventions in dementia care, particularly using biographical or personalized materials. They share a similar context but differ in specific focus and application.\", \n  \"score\": 1\n}"
     },
     {
         "role": "user",
@@ -17,7 +17,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 2,\n \"justification\":Both input discuss only one common key-point: people with dementia. Input 1 discusses a web platform to assist psychologists in collecting information about people with dementia.  Input 2 focuses on non-pharmacological interventions for dementia, particularly biographical or personalized materials.  While both relate to dementia, they address different aspects—one is about a technological tool for data collection, and the other about therapeutic methods.  Their key ideas share some thematic overlap but are fundamentally different in focus and application.\"\" \n}"
+        "content": "{\n \"justification\":Both input discuss only one common key-point: people with dementia. Input 1 discusses a web platform to assist psychologists in collecting information about people with dementia.  Input 2 focuses on non-pharmacological interventions for dementia, particularly biographical or personalized materials.  While both relate to dementia, they address different aspects—one is about a technological tool for data collection, and the other about therapeutic methods.  Their key ideas share some thematic overlap but are fundamentally different in focus and application.\", \n  \"score\": 2\n}"
     },
     {
         "role": "user",
@@ -25,7 +25,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 5,\n \"justification\": Both inputs describe two main-points: creating a web platform and improving the collection of data for specific professional use.   Input 1 specifies two more key-points: the platform supports psychologists working with people with dementia, while Input 2 emphasizes improvements in data collection and therapy awareness.   The core idea of a web platform facilitating data collection is similar, but the specific focus areas slightly differ.\"\" \n}"
+        "content": "{\n  \"justification\": Both inputs describe two main-points: creating a web platform and improving the collection of data for specific professional use.   Input 1 specifies two more key-points: the platform supports psychologists working with people with dementia, while Input 2 emphasizes improvements in data collection and therapy awareness. The core idea of a web platform facilitating data collection is similar, but the specific focus areas slightly differ.\", \n  \"score\": 5\n}"
     },
     {
         "role": "user",
@@ -33,7 +33,7 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 8,\n \"justification\"::Both inputs describe a web platform aimed at supporting the care of people with dementia by streamlining the collection of relevant information.   While input 2 miss one key-point: the platform is supporting psychologists generally, leading to score of 8. \"\" \n}"
+        "content": "{\n  \"justification\"::Both inputs describe a web platform aimed at supporting the care of people with dementia by streamlining the collection of relevant information.   While input 2 miss one key-point: the platform is supporting psychologists generally, leading to score of 8. \", \n  \"score\": 8\n}"
     },
     {
         "role": "user",
@@ -41,6 +41,6 @@
     },
     {
         "role": "assistant",
-        "content": "{\n \"score\": 10,\n \"justification\":Both inputs describe a web platform designed to assist psychologists by streamlining the collection of information about people with dementia.   Input 2 provides a little additional detail by mentioning biographical information, but the core idea remains nearly identical. \"\" \n}"
+        "content": "{\n  \"justification\":Both inputs describe a web platform designed to assist psychologists by streamlining the collection of information about people with dementia.   Input 2 provides a little additional detail by mentioning biographical information, but the core idea remains nearly identical. \", \n  \"score\": 10\n}"
     }
 ]
