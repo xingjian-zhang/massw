@@ -224,9 +224,7 @@ nahit = NAHit()
 
 
 def compute_bleurt_score(predictions, references):
-    """
-    Compute BLEURT score for the given predictions and references.
-    """
+    """Compute BLEURT score for the given predictions and references."""
     if isinstance(references[0], list):
         grouped_references = list(zip(*references))
         scores = []
