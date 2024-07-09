@@ -56,7 +56,8 @@ class LLMSimilarity:
 
     def generate_prompt(self, text_1: str, text_2: str):
         """Generate the prompt for the language model."""
-        with open(f'../prompts/{self.aspect}.json', 'r', encoding='utf-8') as file:
+        with open(f'../prompts/{self.aspect}.json',
+                  'r', encoding='utf-8') as file:
             messages = json.load(file)
         user_prompt = f"Input 1: {text_1}\nInput 2: {text_2}"
         messages.append({
@@ -222,6 +223,28 @@ meteor = evaluate.load("meteor")
 nahit = NAHit()
 
 
+def compute_bleurt_score(predictions, references):
+    """
+    Compute BLEURT score for the given predictions and references.
+    """
+    if isinstance(references[0], list):
+        grouped_references = list(zip(*references))
+        scores = []
+        for grouped_reference in grouped_references:
+            score = bleurt.compute(
+                predictions=predictions,
+                references=grouped_reference)
+            scores.append(score["scores"])
+        scores = np.array(scores)  # (num_refs, num_preds)
+        score = np.mean(np.max(scores, axis=0))
+    else:
+        score = bleurt.compute(
+            predictions=predictions,
+            references=references)
+        score = np.mean(score["scores"])
+    return score
+
+
 def compute_metrics(predictions: List[str],
                     references: List[List[str]],
                     metric_names=None,
@@ -238,8 +261,9 @@ def compute_metrics(predictions: List[str],
             "nahit",
             "llm_sim"
         ]
-    if aspect is not None and aspect not in ["context",
-                                             "key_idea", "method", "outcome", "future"]:
+    if aspect is not None and aspect not in [
+        "context", "key_idea", "method", "outcome", "future"
+    ]:
         raise ValueError(
             f"""Invalid type: {aspect}.
             Must be one of ['context',
@@ -294,22 +318,7 @@ def compute_metrics(predictions: List[str],
                     "f1": np.array(score["f1"]).mean()
                 }
             elif metric_name == "bleurt":
-                if isinstance(references[0], list):
-                    grouped_references = list(zip(*references))
-                    scores = []
-                    for grouped_reference in grouped_references:
-                        score = \
-                            metric_computation_functions[metric_name].compute(
-                                predictions=predictions,
-                                references=grouped_reference)
-                        scores.append(score["scores"])
-                    scores = np.array(scores)  # (num_refs, num_preds)
-                    score = np.mean(np.max(scores, axis=0))
-                else:
-                    score = metric_computation_functions[metric_name].compute(
-                        predictions=predictions,
-                        references=references)
-                    score = np.mean(score["scores"])
+                score = compute_bleurt_score(predictions, references)
                 metrics[metric_name] = {"bleurt": score}
             else:
                 metrics[metric_name] = \
@@ -363,7 +372,7 @@ if __name__ == "__main__":
     metrics_demo = compute_metrics(predictions=predictions_demo,
                                    references=references_demo,
                                    metric_names=["llm_sim"],
-                                   aspect = "context")
+                                   aspect="context")
 
     # Print results
     print(json.dumps(metrics_demo, indent=2))

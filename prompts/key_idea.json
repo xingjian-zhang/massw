@@ -41,6 +41,6 @@
     },
     {
         "role": "assistant",
-        "content": "{\n  \"justification\":Both inputs describe a web platform designed to assist psychologists by streamlining the collection of information about people with dementia.   Input 2 provides a little additional detail by mentioning biographical information, but the core idea remains nearly identical. \", \n  \"score\": 10\n}"
+        "content": "{\n  \"justification\":Both inputs describe a web platform designed to assist psychologists by streamlining the collection of information about people with dementia.   Input 2 provides a little additional detail by mentioning biographical information, but the core idea remains nearly identical. \", \n  \"score\": 9\n}"
     }
 ]
