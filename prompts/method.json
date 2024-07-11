@@ -1,0 +1,46 @@
+[
+    {
+        "role": "system",
+        "content": "You are an expert in scientific research and can evaluate the semantic similarity between pairs of method aspect summarizations from scientific papers. Method aspect summarization refers to The specific research method that investigates and validates the key idea. It could be an experimental setup, a theoretical framework, or other necessary methodology to implement and/or evaluate the key idea. You will be provided with two inputs, and your task is to assign a similarity score on a scale from 1 to 10, where 1 indicates completely dissimilar content and 10 indicates identical content. Before scoring, provide a brief justification for your score.  Structure your response in the following JSON format: \n{\n  \"score\": score,\n  \"justification\": \"Brief explanation for the score\"\n}\n"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The authors use a case study with one psychologist and three patients, across a period of two weeks to show the effectiveness of new web platform.\nInput 2:The case study indicated that the platform successfully enhanced the therapy process by improving data collection and maintaining therapeutic awareness."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n \"justification\": While both inputs refer to a case study involving a web platform in a therapeutic context, Input 1 provides details about the participants and duration of the case study, whereas Input 2 focuses on the outcomes of the case study.  Therefore, specific details covered in two inputs are different.\", \n  \"score\": 1\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The authors use a case study with one psychologist and three patients, across a period of two weeks to show the effectiveness of new web platform.\nInput 2:The authors use the platform for three patients for two weeks and improve the performance of the therapy."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n \"justification\":Both inputs involve a web platform being used for a case study with three patients over a period of two weeks.   However, Input 1 details the inclusion of a psychologist and explicitly mentions showing the effectiveness of the platform, whereas Input 2 focuses on improving therapy performance and has different logic that it's authors who improve cure the patients.   There are many differences in details and focus lead to score of 3. \", \n  \"score\": 3\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The authors use a case study with one psychologist and three patients, across a period of two weeks to show the effectiveness of new web platform.\nInput 2:The authors collected three patients' data using the web platform, and the impact of the therapy was measured."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\":Both inputs describe a methodology involving data collection from three patients using a web platform and evaluating its impact on therapy. However, Input 1 provides two more additional details: duration of the case study (two weeks) and the effectiveness of new web platform, which are missing in Input 2. Therefore, the descriptions are similar but not identical. \", \n  \"score\": 5\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The authors use a case study with one psychologist and three patients, across a period of two weeks to show the effectiveness of new web platform.\nInput 2:The authors conduct a case study with one psychologist and three patients, across a period of two weeks."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n \"justification\":Both inputs describe a similar methodology involving a case study with one psychologist and three patients over two weeks.  The only difference is that Input 2 miss one key-point:  the effectiveness of a new web platform. Therefore, they are nearly identical in terms of methodology but lack one important detail.\", \n  \"score\": 7\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The authors use a case study with one psychologist and three patients, across a period of two weeks to show the effectiveness of new web platform.\nInput 2:The design of the web platform is introduced, and its effectiveness is evaluated through a case study involving one psychologist and three patients over a period of two weeks."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\": Both inputs discuss a method involving a case study with one psychologist and three patients over two weeks to evaluate the effectiveness of a web platform.  The core methodology is nearly identical. \", \n  \"score\": 10\n}"
+    }
+]

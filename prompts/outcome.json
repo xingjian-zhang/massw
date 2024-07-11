@@ -1,0 +1,46 @@
+[
+    {
+        "role": "system",
+        "content": "You are an expert in scientific research and can evaluate the semantic similarity between pairs of outcome aspect summarizations from scientific papers. Outcome refers to the factual statement about the study output. It could be the experiment results and any other measurable outcome that has occurred. It marks whether the key hypothesis is testified or not . You will be provided with two inputs, and your task is to assign a similarity score on a scale from 1 to 10, where 1 indicates completely dissimilar content and 10 indicates identical content. Before scoring, provide a brief justification for your score.  Structure your response in the following JSON format: \n{\n  \"score\": score,\n  \"justification\": \"Brief explanation for the score\"\n}\n"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The case study show that web platform make improvements in the collection of meaningful data about a person, and on maintaining awareness of the therapy as a whole.\nInput 2:The authors propose a web platform to collect and manage biographical materials in a streamlined manner, enabling reminiscence and other biographical cognitive stimulation practices for people with dementia."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\":Two inputs only have one key-point in common: web platform. Input 1 emphasizes improvements in data collection and maintaining therapy awareness accomplished by the web platform, whereas Input 2 highlights motivation and advantages of the web platform.  The overlap is in the concept of data collection for therapeutic purposes, but the specifics and context differ significantly. \", \n  \"score\": 1\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The case study show that web platform make improvements in the collection of meaningful data about a person, and on maintaining awareness of the therapy as a whole.\nInput 2:Experienments by conducted by one psychologist and three patients, across a period of two weeks show change of collection of data about a person made by the web platform."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\": Both inputs refer to a web platform and its role in the collection of data about a person.  However, Input 1 specifically mentions ‘case study’, 'improvements' and 'maintaining awareness of the therapy,' while Input 2 only indicates a 'change' in data collection instead of improvement and does not address therapy awareness. And it has more details about experienments.\", \n  \"score\": 3\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The case study show that web platform make improvements in the collection of meaningful data about a person, and on maintaining awareness of the therapy as a whole.\nInput 2:Results from a case study with one psychologist and three patients, across a period of two weeks show improvements in the collection of meaningful data about a person."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\":Both inputs discuss the case stady shows improvements in the collection of meaningful data about a person.  Input 1 also mentions two other main points: maintaining awareness of therapy and the platform.  Input 2 provides additional context about the participants and duration of the case study, which is not mentioned in Input 1, leading to score of 5.\", \n  \"score\": 5\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The case study show that web platform make improvements in the collection of meaningful data about a person, and on maintaining awareness of the therapy as a whole.\nInput 2:The study showed improvements in the collection and analyzing of patient data and maintenance of the therapy's overall awareness."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n \"justification\":Both inputs emphasize three key-points: the case study,  improvements in data collection and maintaining awareness of therapy.  The primary differences are the addition of 'analyzing' in Input 2 and input 2 miss one key-point platform, leading to score of 7. \", \n  \"score\": 7\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:The case study show that web platform make improvements in the collection of meaningful data about a person, and on maintaining awareness of the therapy as a whole.\nInput 2:The platform showed improvements in the collection of meaningful data about people with dementia and in maintaining awareness of the therapy as a whole."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\":Both inputs describe improvements made by a web platform in the collection of meaningful data about persons and maintaining awareness of therapy. The details are nearly identical, with input2 miss a point: the case study, leading to score of 9.\", \n  \"score\": 9\n}"
+    }
+]

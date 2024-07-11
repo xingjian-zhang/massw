@@ -1,0 +1,46 @@
+[
+    {
+        "role": "system",
+        "content": "You are an expert in scientific research and can evaluate the semantic similarity between pairs of context aspect summarizations from scientific papers.  The context refers to the status quo of related literature or reality which motivated the study.  It typically includes a problem, a research question, or a research gap that has not been successfully addressed by previous work.  You will be provided with two inputs, and your task is to assign a similarity score on a scale from 1 to 10, where 1 indicates completely dissimilar content and 10 indicates identical content.  Before scoring, provide a brief justification for your score.  Structure your response in the following JSON format: \n{\n  \"score\": score,\n  \"justification\": \"Brief explanation for the score\"\n}\n"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:Non-pharmacological interventions are the most common and the most effective for people with dementia.  Using biographical or personalized materials has been proven to benefit these interventions, but it can be challenging to obtain and maintain such information.\nInput 2:The authors create a web platform that supports the work of psychologists, streamlining the collection of relevant information about people with dementia."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\": \"The similarity between the two inputs is minimal. Both inputs only have one key point in common: people with dementia. Input 1 focuses on the effectiveness of non-pharmacological interventions, particularly those involving biographical or personalized materials, and mentions the challenges of maintaining such information. Input 2, on the other hand, talks about the creation of a web platform to streamline the collection of relevant information about people with dementia, which may indirectly relate to the challenges mentioned in Input 1 but does not directly address non-pharmacological interventions or their effectiveness, leading to a score of 1.\", \n  \"score\": 1\n}"
+    },  
+    {
+        "role": "user",
+        "content": "Input 1:Non-pharmacological interventions are the most common and the most effective for people with dementia.  Using biographical or personalized materials has been proven to benefit these interventions, but it can be challenging to obtain and maintain such information.\nInput 2:Non-pharmacological interventions are the most common and arguably most effective for people with dementia."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\": Both inputs discuss two key points: non-pharmacological interventions and its effectiveness for people with dementia. However, Input 1 goes into more detail by mentioning the use of biographical or personalized materials and the challenges associated with obtaining and maintaining them. Input 2 does not include this additional information, leading to score of 4. \", \n  \"score\": 4\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:Non-pharmacological interventions are the most common and the most effective for people with dementia.  Using biographical or personalized materials has been proven to benefit these interventions, but it can be challenging to obtain and maintain such information.\nInput 2:Non-pharmacological interventions, particularly those utilizing biographical or personalized materials, are effective for people with dementia."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\": Both inputs discuss three key points: non-pharmacological interventions, its effectiveness for people with dementia and the use of biographical or personalized materials.  However, Input 1 goes further to highlight two more key points: the challenge of obtaining and maintaining such information, leading to score of 6.\", \n  \"score\": 6\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:Non-pharmacological interventions are the most common and the most effective for people with dementia.  Using biographical or personalized materials has been proven to benefit these interventions, but it can be challenging to obtain and maintain such information.\nInput 2:Some interventions effective for people with dementia have been proven to benefit from the use of biographical or personalized materials. However, these materials are not always easy to obtain and can be challenging to maintain."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\":Both inputs discuss the effectiveness of interventions for people with dementia and highlight the benefits of using biographical or personalized materials. They also both note the challenges associated with obtaining and maintaining such information. The only difference is input 2 miss one key-point:non-pharmacological interventions, leading to score of 8. \", \n  \"score\": 8\n}"
+    },
+    {
+        "role": "user",
+        "content": "Input 1:Non-pharmacological interventions are the most common and the most effective for people with dementia.  Using biographical or personalized materials has been proven to benefit these interventions, but it can be challenging to obtain and maintain such information.\nInput 2:Non-pharmacological interventions, such as reminiscence and biographical cognitive stimulation practices, are common and effective for people with dementia.  However, obtaining and maintaining biographical or personalized materials can be challenging."
+    },
+    {
+        "role": "assistant",
+        "content": "{\n  \"justification\":Both inputs discuss the effectiveness of non-pharmacological interventions for people with dementia, specifically mentioning the use of biographical or personalized materials. They also both highlight the challenge of obtaining and maintaining such information. The semantic content is nearly identical lead to score of 10. \", \n  \"score\": 10\n}"
+    }
+]
