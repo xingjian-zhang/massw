@@ -178,6 +178,12 @@ Or download the dataset through Dropbox links:
 
 See [here](benchmark/aspect_prediction/README.md) for more details.
 
+## Example Visualization (Contexts)
+
+We provide a low-dimensional visualization of the contexts of the MASSW dataset, where each point represents a paper and is colored by the publication year. Topics are assigned automatically using BERTopic.
+
+![contexts](assets/context_topic_labels.png)
+
 ## Citation
 
 If you find MASSW useful, please cite the following paper:
