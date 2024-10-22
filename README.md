@@ -27,6 +27,13 @@ MASSW is a comprehensive text dataset on **M**ulti-**A**spect **S**ummarization 
 MASSW includes more than 152,000 peer-reviewed publications from 17 leading
 computer science conferences spanning the past 50 years.
 
+> **UPDATE: MASSW is now available on Hugging Face! See [here](https://huggingface.co/datasets/jimmyzxj/massw) for more details.**
+> ```python
+> from datasets import load_dataset
+> ds = load_dataset("jimmyzxj/massw", "massw_data")
+> ds_metadata = load_dataset("jimmyzxj/massw", "massw_metadata")
+> ```
+
 ## Key features
 
 - **Structured scientific workflows**. MASSW defines [five core aspects of a scientific workflow](#core-aspects-of-a-scientific-workflow) -- *context*, *key idea*, *method*, *outcome*, and *projected impact*. These aspects align with the typical stages in scientific workflows identified in recent literature. Utilizing LLMs, we systematically extract and structure these five aspects from each publication.
