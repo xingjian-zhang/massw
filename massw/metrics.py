@@ -3,112 +3,12 @@
 See example usage in the `__main__` block at the end of the file.
 """
 
-import asyncio
 import json
 from typing import List, Union
 
 import evaluate
 import numpy as np
 from sentence_transformers import SentenceTransformer
-
-from massw.models.gpt_azure import Batch
-
-LLM_SIM_PROMPT = """
-You are an expert in Computer Science with a specialization in text analysis,
-you are tasked to evaluate the semantic similarity between pairs of abstractive
-summarizations from scientific papers. Each summarization pertains to the same
-aspect (Context, Key Idea, Method, Outcome, or Projected Impact) of the same
-paper.
-
-For each pair of summarizations, classify the aspect,
-and assign a similarity score on a scale from 1 to 10,
-where 1 indicates completely dissimilar and 10
-indicates identical content. Before scoring, include a brief justification for
-your score.
-You should output your results in JSON format as shown in the example.
-
-Example Input:
-Input 1: The experiments demonstrated a 20% increase in efficiency,
-confirming the proposed model's effectiveness.
-Input 2: Results show that the new model outperforms existing ones
-by improving efficiency by approximately 20%.
-
-Example JSON Output:
-{
-  "aspect": "Outcome",
-  "score": 9,
-  "justification": "Both texts describe similar measurable improvements
-  in efficiency, closely aligning in their depiction
-  of the model's effectiveness."
-}
-"""
-
-
-class LLMSimilarity:
-    """Evaluate the similarity between two texts using a language model."""
-
-    def __init__(self, aspect: str = "context", model_name: str = "gpt-4o"):
-        """Initialize the language model similarity evaluator."""
-        assert model_name in ["gpt-4o", "gpt-35-turbo"]
-        self.model_name = model_name
-        self.tpm = {"gpt-4o": 4000, "gpt-35-turbo": 40000}[model_name]
-        self.aspect = aspect
-
-    def generate_prompt(self, text_1: str, text_2: str):
-        """Generate the prompt for the language model."""
-        with open(f'../prompts/{self.aspect}.json',
-                  'r', encoding='utf-8') as file:
-            messages = json.load(file)
-        user_prompt = f"Input 1: {text_1}\nInput 2: {text_2}"
-        messages.append({
-                "role": "user",
-                "content": user_prompt
-            })
-        return messages
-
-    async def _compute(self,
-                       predictions: List[str],
-                       references: List[List[str]]):
-        """Compute the similarity between predictions and references."""
-        batch = Batch(tpm=self.tpm)
-        if isinstance(references[0], list):
-            new_predictions = []
-            for pred, refs in zip(predictions, references):
-                new_predictions.extend([pred] * len(refs))
-            new_references = [ref for refs in references for ref in refs]
-            predictions, references = new_predictions, new_references
-        # Compute similarity between each prediction and reference
-        for i, (pred, ref) in enumerate(zip(predictions, references)):
-            messages = self.generate_prompt(pred, ref)
-            await batch.add(endpoint="chat.completions.create",
-                            response_format={"type": "json_object"},
-                            model=self.model_name,
-                            messages=messages,
-                            metadata={"id": i})
-        results = await batch.run()
-        results = results.sort_values("id")
-        outputs = results["result"].apply(
-            lambda x: x["choices"][0]["message"]["content"])
-        try:
-            scores = outputs.apply(lambda x: float(json.loads(x)["score"]))
-        except ValueError as e:
-            print(e)
-            scores = None
-        scores = scores.dropna()
-        scores = scores.to_numpy()
-        try:
-            scores = scores.reshape(len(predictions), -1)
-            return {"llm_sim": float(np.mean(np.max(scores, axis=1)))}
-        except ValueError as e:
-            print(e)
-            return {"llm_sim": float(np.mean(scores))}
-
-    def compute(self, predictions: List[str], references: List[List[str]]):
-        """Compute the similarity between predictions and references."""
-        loop = asyncio.get_event_loop()
-        results = loop.run_until_complete(
-            self._compute(predictions, references))
-        return results
 
 
 class CosineSimilarity:
@@ -256,17 +156,8 @@ def compute_metrics(predictions: List[str],
             "meteor",
             "bleurt",
             "bertscore",
-            "nahit",
-            "llm_sim"
+            "nahit"
         ]
-    if aspect is not None and aspect not in [
-        "context", "key_idea", "method", "outcome", "future"
-    ]:
-        raise ValueError(
-            f"""Invalid type: {aspect}.
-            Must be one of ['context',
-            'key_idea', 'method', 'outcome', 'future']."""
-            )
     metrics = {}
     if "nahit" in metric_names:
         metrics["nahit"] = nahit.compute(
@@ -294,7 +185,6 @@ def compute_metrics(predictions: List[str],
 
     metric_computation_functions = {
         "cosine": cs,
-        "llm_sim": LLMSimilarity(aspect=aspect),
         "rouge": rouge,
         "bleu": bleu,
         "meteor": meteor,
@@ -356,8 +246,6 @@ def flatten_metrics(metric_dict: dict):
         flat_metrics["BERTScore-f1"] = metric_dict["bertscore"]["f1"]
     if "bleurt" in metric_dict:
         flat_metrics["BLEURT"] = metric_dict["bleurt"]["bleurt"]
-    if "llm_sim" in metric_dict:
-        flat_metrics["LLM Similarity"] = metric_dict["llm_sim"]["llm_sim"]
     return flat_metrics
 
 
@@ -368,9 +256,7 @@ if __name__ == "__main__":
 
     # Compute metrics
     metrics_demo = compute_metrics(predictions=predictions_demo,
-                                   references=references_demo,
-                                   metric_names=["llm_sim"],
-                                   aspect="context")
+                                   references=references_demo)
 
     # Print results
     print(json.dumps(metrics_demo, indent=2))
