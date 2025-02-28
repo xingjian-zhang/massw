@@ -1,3 +1,5 @@
+"""Base classes for paper collection from academic conferences."""
+
 import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
@@ -10,6 +12,20 @@ from tqdm import tqdm
 
 @dataclass
 class Paper:
+    """
+    Represents a research paper with its metadata.
+
+    Attributes:
+        pid: Unique paper ID, formatted as `{venue}_{year}_{pid}`
+        year: Year of publication
+        venue: Publication venue
+        title: Title of the paper
+        authors: Authors of the paper
+        abstract: Abstract of the paper
+        pdf_url: URL to the PDF of the paper that can be directly downloaded
+        url: URL to the paper page on the venue website
+    """
+
     # Unique paper ID, formatted as `{venue}_{year}_{pid}`
     pid: str
     # Year of publication
@@ -29,6 +45,19 @@ class Paper:
 
 
 class BaseCollection(ABC):
+    """
+    Abstract base class for collecting papers from academic conferences.
+
+    This class provides common functionality for collecting, storing, and
+    downloading papers from various academic venues.
+
+    Attributes:
+        year: The year of the conference
+        venue: The venue code (e.g., 'neurips', 'acl')
+        papers: List of collected papers
+        data_dir: Directory to store the collected data
+    """
+
     def __init__(self, year: int, venue: str):
         self.year: int = year
         self.venue: str = venue
@@ -41,7 +70,7 @@ class BaseCollection(ABC):
         Abstract method that must be implemented by subclasses.
         This method should collect papers from the specific venue.
         """
-        pass
+        raise NotImplementedError("Subclasses must implement this method.")
 
     def add_paper(
         self,
@@ -51,6 +80,16 @@ class BaseCollection(ABC):
         pdf_url: Optional[str] = None,
         url: Optional[str] = None,
     ):
+        """
+        Add a paper to the collection.
+
+        Args:
+            title: Title of the paper
+            authors: List of authors
+            abstract: Abstract of the paper
+            pdf_url: URL to the PDF file
+            url: URL to the paper page on the venue website
+        """
         self.papers.append(
             Paper(
                 pid=f"{self.venue}_{self.year}_{len(self.papers)}",
@@ -65,6 +104,11 @@ class BaseCollection(ABC):
         )
 
     def save_metadata(self):
+        """
+        Save the metadata of collected papers to a TSV file.
+
+        The metadata is saved to {data_dir}/metadata.tsv.
+        """
         if not os.path.exists(self.data_dir):
             os.makedirs(self.data_dir)
         metadata_path = os.path.join(self.data_dir, "metadata.tsv")
@@ -72,6 +116,11 @@ class BaseCollection(ABC):
         metadata_df.to_csv(metadata_path, sep="\t", index=False)
 
     def download_pdfs(self):
+        """
+        Download PDF files for all papers in the collection.
+
+        The PDFs are saved to {data_dir}/pdf/{pid}.pdf.
+        """
         pdf_dir = os.path.join(self.data_dir, "pdf")
         if not os.path.exists(pdf_dir):
             os.makedirs(pdf_dir)
@@ -79,6 +128,6 @@ class BaseCollection(ABC):
             if paper.pdf_url:
                 pdf_path = os.path.join(pdf_dir, f"{paper.pid}.pdf")
                 if not os.path.exists(pdf_path):
-                    response = requests.get(paper.pdf_url)
+                    response = requests.get(paper.pdf_url, timeout=30)
                     with open(pdf_path, "wb") as f:
                         f.write(response.content)

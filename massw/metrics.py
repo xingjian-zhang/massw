@@ -145,8 +145,7 @@ def compute_bleurt_score(predictions, references):
 
 def compute_metrics(predictions: List[str],
                     references: List[List[str]],
-                    metric_names=None,
-                    aspect=None):
+                    metric_names=None):
     """Compute cosine similarity, ROUGE, BLEU, METEOR, and BERTScore."""
     if metric_names is None:
         metric_names = [
