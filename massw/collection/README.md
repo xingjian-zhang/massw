@@ -9,7 +9,7 @@ This folder contains the script and instructions for collecting the conference p
 
 | Conference | Metadata | PDF | Parsed Full Text |
 |:----------:|:--------:|:---:|:----------------:|
-| AAAI       | 🚧      | 🚧 | 🚧              |
+| AAAI       | ✅      | ✅ | 🚧              |
 | ACL        | 🚧      | 🚧 | 🚧              |
 | CHI        | 🚧      | 🚧 | 🚧              |
 | CVPR       | 🚧      | 🚧 | 🚧              |
@@ -21,7 +21,7 @@ This folder contains the script and instructions for collecting the conference p
 | IJCAI      | 🚧      | 🚧 | 🚧              |
 | KDD        | 🚧      | 🚧 | 🚧              |
 | NAACL      | 🚧      | 🚧 | 🚧              |
-| NeurIPS    | 🚧      | 🚧 | 🚧              |
+| NeurIPS    | ✅      | ✅ | 🚧              |
 | SIGIR      | 🚧      | 🚧 | 🚧              |
 | SIGMOD     | 🚧      | 🚧 | 🚧              |
 | VLDB       | 🚧      | 🚧 | 🚧              |
