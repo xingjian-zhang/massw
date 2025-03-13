@@ -9,4 +9,7 @@ Run the script to extract and collect the URLs of the paper PDFs. This process t
 3.  Downloading PDFs:
 After collecting the URLs, run the download_pdfs() function to fetch all the PDFs. This step is estimated to take around 1 hour and 30 minutes.
 
+# Statistic
+Our script retrieves metadata for 2,865 papers from the AAAI-2024 conference. This number aligns closely with external sources, some of which report figures like 2,867 papers`https://dblp.org/db/conf/aaai/aaai2024.html`, and it confirms that the conference accepted over 2,500 papers overall `https://www.paperdigest.org/2024/02/aaai-2024-papers-highlights/` This comprehensive metadata collection underscores the scale and breadth of contributions presented at AAAI-2024.
+
 
