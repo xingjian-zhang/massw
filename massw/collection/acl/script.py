@@ -94,4 +94,4 @@ if __name__ == "__main__":
     collection = ACLCollection(year=2024)
     if not os.path.exists(os.path.join(collection.data_dir, "metadata.tsv")):
         collection.collect()
-    #collection.download_pdfs()
+    collection.download_pdfs()
