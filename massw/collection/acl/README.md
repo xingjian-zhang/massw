@@ -10,4 +10,4 @@ Run the script to extract and collect the URLs of the paper PDFs. This process t
 After collecting the URLs, run the download_pdfs() function to fetch all the PDFs. This step is estimated to take around 10 minutes.
 
 # Statistic
-Our script retrieves metadata for a total of 941 papers from the ACL 2024 conference, encompassing both long and short papers. This figure is consistent with the official records available on the ACL website, ensuring the accuracy of the collected data.
+Our script retrieves metadata for a total of 941 papers from the ACL 2024 conference, including both long and short papers. This figure is consistent with the official records available on the ACL website, ensuring the accuracy of the collected data.
