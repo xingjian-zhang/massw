@@ -102,9 +102,13 @@ class CVPRCollection(BaseCollection):
                 pdf_url = row["pdf_url"]
                 pid = row["pid"]
                 pdf_path = os.path.join(pdf_dir, f"{pid}.pdf")
-                response = requests.get(pdf_url, verify=False, timeout=30)
-                with open(pdf_path, "wb") as f:
-                    f.write(response.content)
+                try:
+                    response = requests.get(pdf_url, verify=False, timeout=30)
+                    with open(pdf_path, "wb") as f:
+                        f.write(response.content)
+                except:
+                    print(f"Failed to download {pdf_url}")
+                    continue
 
 
 if __name__ == "__main__":
