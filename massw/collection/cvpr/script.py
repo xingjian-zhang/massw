@@ -24,7 +24,7 @@ class CVPRCollection(BaseCollection):
 
     def collect(self):
         url = f"{self.base_url}CVPR{self.year}?day=all"
-        response = requests.get(url, headers=self.headers)
+        response = requests.get(url, headers=self.headers, timeout=30)
         if response.status_code != 200:
             print(f"Failed to fetch data: Status code {response.status_code}")
 
@@ -61,13 +61,19 @@ class CVPRCollection(BaseCollection):
 
             authors = ", ".join(transformed_authors)
             # get abstract
-            response = requests.get(paper_url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "html.parser")
-            abstract_div = soup.find("div", id="abstract")
-            if abstract_div:
-                abstract_text = abstract_div.text.strip()
-                abstract_text = re.sub(r"\s+", " ", abstract_text)
+            try:
+                response = requests.get(
+                    paper_url, headers=self.headers, timeout=30, verify=False
+                )
+                response.raise_for_status()
+                soup = BeautifulSoup(response.text, "html.parser")
+                abstract_div = soup.find("div", id="abstract")
+                if abstract_div:
+                    abstract_text = abstract_div.text.strip()
+                    abstract_text = re.sub(r"\s+", " ", abstract_text)
+            except:
+                print(f"Failed to fetch {paper_url}")
+                continue
 
             self.add_paper(
                 title=title,
@@ -96,7 +102,7 @@ class CVPRCollection(BaseCollection):
                 pdf_url = row["pdf_url"]
                 pid = row["pid"]
                 pdf_path = os.path.join(pdf_dir, f"{pid}.pdf")
-                response = requests.get(pdf_url, timeout=30)
+                response = requests.get(pdf_url, verify=False, timeout=30)
                 with open(pdf_path, "wb") as f:
                     f.write(response.content)
 
