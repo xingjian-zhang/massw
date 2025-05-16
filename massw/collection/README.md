@@ -10,9 +10,9 @@ This folder contains the script and instructions for collecting the conference p
 | Conference | Metadata | PDF | Parsed Full Text |
 |:----------:|:--------:|:---:|:----------------:|
 | AAAI       | ✅      | ✅ | 🚧              |
-| ACL        | 🚧      | 🚧 | 🚧              |
+| ACL        | ✅      | ✅ | 🚧              |
 | CHI        | 🚧      | 🚧 | 🚧              |
-| CVPR       | 🚧      | 🚧 | 🚧              |
+| CVPR       | ✅      | ✅ | 🚧              |
 | ECCV       | 🚧      | 🚧 | 🚧              |
 | EMNLP      | 🚧      | 🚧 | 🚧              |
 | ICCV       | 🚧      | 🚧 | 🚧              |
